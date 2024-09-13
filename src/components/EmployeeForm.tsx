@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addEmployee, updateEmployee } from "../features/employeeSlice";
 import { AppDispatch } from "../app/store";
 import { Employee } from "../features/employeeSlice";
+import { TextField, Button, Box } from "@mui/material"; // Import MUI components
 
 interface EmployeeFormProps {
   currentEmployee?: Employee;
@@ -38,11 +39,14 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     };
 
     if (currentEmployee) {
+      // Update existing employee
       dispatch(updateEmployee(newEmployee));
     } else {
+      // Add new employee
       dispatch(addEmployee(newEmployee));
     }
 
+    // Clear form and trigger callback
     setName("");
     setPosition("");
     setDepartment("");
@@ -50,43 +54,33 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-      <div>
-        <label>Name</label>
-        <input
-          type="text"
+    <form onSubmit={handleSubmit}>
+      <Box display="flex" flexDirection="column" gap={2}>
+        <TextField
+          label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border w-full px-4 py-2"
           required
+          fullWidth
         />
-      </div>
-      <div>
-        <label>Position</label>
-        <input
-          type="text"
+        <TextField
+          label="Position"
           value={position}
           onChange={(e) => setPosition(e.target.value)}
-          className="border w-full px-4 py-2"
           required
+          fullWidth
         />
-      </div>
-      <div>
-        <label>Department</label>
-        <input
-          type="text"
+        <TextField
+          label="Department"
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
-          className="border w-full px-4 py-2"
           required
+          fullWidth
         />
-      </div>
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        {currentEmployee ? "Update Employee" : "Add Employee"}
-      </button>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          {currentEmployee ? "Update Employee" : "Add Employee"}
+        </Button>
+      </Box>
     </form>
   );
 };

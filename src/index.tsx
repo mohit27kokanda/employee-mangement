@@ -3,19 +3,16 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import App from "./App";
-import "./index.css";
-
 import { makeServer } from "./migrate";
 
-if (process.env.NODE_ENV === "development") {
-  makeServer();
+// Start MirageJS in both development and production environments
+if (process.env.NODE_ENV !== "test") {
+  makeServer({ environment: process.env.NODE_ENV });
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );

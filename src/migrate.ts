@@ -1,7 +1,8 @@
 import { createServer, Model } from "miragejs";
 
-export function makeServer() {
+export function makeServer({ environment = "development" } = {}) {
   return createServer({
+    environment, // Pass environment separately
     models: {
       employee: Model,
     },
@@ -25,7 +26,6 @@ export function makeServer() {
         position: "Designer",
         department: "Design",
       });
-
       for (let i = 4; i <= 10; i++) {
         server.create("employee", {
           id: `${i}`,

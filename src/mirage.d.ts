@@ -3,6 +3,7 @@ declare module "miragejs" {
     models?: { [key: string]: ModelDefinition };
     seeds?: (server: Server) => void;
     routes?: (this: Server) => void;
+    environment;
   }): Server;
 
   export class Model {
