@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addEmployee, updateEmployee } from "../features/employeeSlice";
 import { AppDispatch } from "../app/store";
 import { Employee } from "../features/employeeSlice";
-import { TextField, Button, Box } from "@mui/material"; // Import MUI components
+import { TextField, Button, Box } from "@mui/material";
 
 interface EmployeeFormProps {
   currentEmployee?: Employee;
@@ -39,14 +39,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     };
 
     if (currentEmployee) {
-      // Update existing employee
       dispatch(updateEmployee(newEmployee));
     } else {
-      // Add new employee
       dispatch(addEmployee(newEmployee));
     }
 
-    // Clear form and trigger callback
     setName("");
     setPosition("");
     setDepartment("");
